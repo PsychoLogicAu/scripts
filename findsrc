@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# This script calls "find" with all passed arguments
+# but omits results for any subdirectory named 'build'
+
+# Check if at least one argument (the directory) is provided
+if [ "$#" -lt 1 ]; then
+  echo "Usage: $0 <directory> [find options]"
+  exit 1
+fi
+
+# The first argument is the directory to search within
+SEARCH_DIR="$1"
+shift  # Remove the first argument so the rest can be passed to find
+
+# Define a filter to exclude 'build' directories
+EXCLUDE='-name build -type d -prune -o'
+
+# Check if any additional arguments were passed
+if [ "$#" -eq 0 ]; then
+  # No additional arguments, just list all files excluding 'build' directories
+  find "$SEARCH_DIR" $EXCLUDE -print
+else
+  # Additional arguments were passed, include the exclude filter and pass the arguments
+  find "$SEARCH_DIR" $EXCLUDE -name "$@"
+fi
