@@ -1,4 +1,5 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
-/usr/bin/code --new-window $@
+# Call Visual Studio Code with the --new-window option
+/usr/bin/code --new-window "$@"
 
