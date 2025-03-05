@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+CLANG_FORMAT_EXE=/usr/bin/clang-format-16
+EXTRA_OPTS="-Wno-error=unknown"
+ARGS="$@"
+
+$CLANG_FORMAT_EXE $EXTRA_OPTS $ARGS

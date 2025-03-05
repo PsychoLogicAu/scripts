@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+if [ $# -eq 0 ]; then
+  echo "Usage: $0 <command> [args...]"
+  exit 1
+fi
+
+# Extract the command and its arguments
+cmd="$1"
+shift
+
+# Generate a filename for stdout and stderr logs
+timestamp=$(date +%Y%m%d%H%M%S)
+stdout_log="/tmp/${cmd}_stdout_${timestamp}.log"
+stderr_log="/tmp/${cmd}_stderr_${timestamp}.log"
+
+# Run the command in the background, redirecting stdout and stderr to log files
+"$cmd" "$@" > "$stdout_log" 2> "$stderr_log" &
+
+# Print a message with the PID of the background process
+echo "Running $cmd in the background with PID $!"

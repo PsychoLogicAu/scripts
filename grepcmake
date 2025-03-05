@@ -1,0 +1,11 @@
+#!/bin/bash
+
+ARGS=''
+for i in "$@"; do 
+    ARGS="$ARGS \"${i//\"/\\\"}\""
+done;
+
+CMD="grep -Hnr --color=always --exclude-dir=build --include=CMakeLists.txt --include=CMakeCache.txt -E $ARGS"
+#echo $CMD
+
+exec bash -c "$CMD"
